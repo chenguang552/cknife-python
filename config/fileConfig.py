@@ -1,4 +1,4 @@
-fileBaseCode='''echo php_uname('s');mkdir("test/");'''
+PHP_fileBaseCode='''echo php_uname('s');mkdir("test/");'''
 fileConfig = {
         'cd',''
         'read',''

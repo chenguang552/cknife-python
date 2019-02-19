@@ -9,13 +9,13 @@ class connect:
         self._typ = typ
     '''
     @classmethod
-    def getURL(cls):
+    def getURL(cls):#get方法 生成url链接
         CONNECT_URL = cls._url + '?' + cls._key + '='
         return CONNECT_URL
 
     #   get
     @classmethod
-    def getUrl(cls):
+    def getUrl(cls):#post方法直接返回基础链接 不需要添加额外路径与参数
         return cls._url
     @classmethod
     def getKey(cls):

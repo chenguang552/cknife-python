@@ -16,6 +16,6 @@ class fileManager:
 
 
     def getBaseCode(self):
-        baseCodeForFile=fileC.fileBaseCode
+        baseCodeForFile=fileC.PHP_fileBaseCode
         #print(baseCodeForFile)
         return baseCodeForFile
