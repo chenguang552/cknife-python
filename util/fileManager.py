@@ -53,7 +53,8 @@ class fileManager:
             self.PATH = self.path(re)+" >"
             # print(PATH)
             flag = input(self.PATH).split()
-
+            if len(flag) == 0:
+                continue
             if flag[0] == 'exit':
                 print('exit')
                 flag == ''
@@ -61,13 +62,19 @@ class fileManager:
                 
             if flag[0] == 'cd':
                 if self.check(flag)>1:
-                    self.i = self.i + 1
-                    self.CHANGE_PATH[self.i] = flag[1]
-                    CD = fileC.PHP_CD.replace('@@',self.changePath(),1)
-                    date = { self.key : CD }
-                    commit = re.post(self.connect,date)
-                    # print(commit.text)
-                    
+                    if flag[1] != '.' and flag[1] != '..':
+                        self.i = self.i + 1
+                        self.CHANGE_PATH[self.i] = flag[1]
+                        CD = fileC.PHP_CD.replace('@@',self.changePath(),1)
+                        date = { self.key : CD }
+                        commit = re.post(self.connect,date)
+                        # print(commit.text)
+                    elif flag[1] != '.':
+                        self.i = self.i - 1
+                    else:
+                        continue
+
+
                 else:
                     continue
                 
