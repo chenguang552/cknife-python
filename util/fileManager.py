@@ -1,5 +1,6 @@
 import config.fileConfig as fileC
 import requests as res
+import random
 class fileManager:
     def __init__(self,con):
         self.con = con
@@ -203,9 +204,28 @@ class fileManager:
                     date = { self.key : update }
                     commit = re.post(self.connect,date)
                     print(commit.text,"\n")
+                    file1.close()
                     continue
                 else:
                     continue
+
+            if flag[0] == 'download':
+                if self.check(flag)>1:
+                    download = fileC.PHP_READ.replace('@@',self.changePath(),1)
+                    download = download.replace('##',flag[1],1)
+                    date = { self.key : download }
+                    commit = re.post(self.connect,date)
+                    #filedown = '/download/'
+                    filedown =str(random.randint(100000,999999)) + '_' + flag[1]
+                    #print(filedown)
+                    file2 = open(filedown ,'w')
+                    file2.write(commit.text)
+                    print('done')
+                    file2.close()
+                    continue
+                else:
+                    continue
+
 
             if flag[0] == 'writeto':
                 if self.check(flag)>2:
