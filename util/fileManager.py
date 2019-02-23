@@ -71,10 +71,7 @@ class fileManager:
                         # print(commit.text)
                     elif flag[1] != '.':
                         self.i = self.i - 1
-                    else:
-                        continue
-
-
+                    continue
                 else:
                     continue
 
@@ -87,6 +84,7 @@ class fileManager:
                     #date = { self.key : fileC.PHP_test }
                     commit = re.post(self.connect,date)
                     print(commit.text,"\n")
+                    continue
                 else:
                     continue
 
@@ -99,6 +97,7 @@ class fileManager:
                     #date = { self.key : fileC.PHP_test }
                     commit = re.post(self.connect,date)
                     print(commit.text,"\n")
+                    continue
                 else:
                     continue
 
@@ -111,6 +110,7 @@ class fileManager:
                     #date = { self.key : fileC.PHP_test }
                     commit = re.post(self.connect,date)
                     print(commit.text,"\n")
+                    continue
                 else:
                     continue
 
@@ -123,6 +123,7 @@ class fileManager:
                     #date = { self.key : fileC.PHP_test }
                     commit = re.post(self.connect,date)
                     print(commit.text,"\n")
+                    continue
                 else:
                     continue
 
@@ -135,6 +136,7 @@ class fileManager:
                     #date = { self.key : fileC.PHP_test }
                     commit = re.post(self.connect,date)
                     print(commit.text,"\n")
+                    continue
                 else:
                     continue
 
@@ -144,6 +146,7 @@ class fileManager:
                 date = { self.key : dir }
                 commit = re.post(self.connect,date)
                 print(commit.text,"\n")
+                continue
 
             if flag[0] == 'pwd' or flag[0] == 'cwd':
                 pwd = fileC.PHP_GETPATH
@@ -151,6 +154,7 @@ class fileManager:
                 date = { self.key : pwd }
                 commit = re.post(self.connect,date)
                 print(commit.text,"\n")
+                continue
 
             if flag[0] == 'rename':
                 if self.check(flag)>2:
@@ -160,6 +164,7 @@ class fileManager:
                     date = { self.key : rename }
                     commit = re.post(self.connect,date)
                     print(commit.text,"\n")
+                    continue
                 else:
                     continue
 
@@ -171,6 +176,7 @@ class fileManager:
                     date = { self.key : copy }
                     commit = re.post(self.connect,date)
                     print(commit.text,"\n")
+                    continue
                 else:
                     continue
 
@@ -182,6 +188,7 @@ class fileManager:
                     date = { self.key : write }
                     commit = re.post(self.connect,date)
                     print(commit.text,"\n")
+                    continue
                 else:
                     continue
 
@@ -196,6 +203,7 @@ class fileManager:
                     date = { self.key : update }
                     commit = re.post(self.connect,date)
                     print(commit.text,"\n")
+                    continue
                 else:
                     continue
 
@@ -214,7 +222,8 @@ class fileManager:
                     date = { self.key : writeto }
                     commit = re.post(self.connect,date)
                     print(commit.text,"\n")
+                    continue
                 else:
                     continue
 
-
+            print('指令错误 !')
