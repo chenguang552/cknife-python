@@ -7,6 +7,7 @@ from util.connect import connect
 from util.shellManager import shellManager
 from util.fileManager import fileManager
 from util.databaseManager import databaseManager
+import config.help as helpTxt
 REC_SYS = sys.argv
 try:
     URL = None
@@ -15,6 +16,9 @@ try:
     CONNECT = connect()
     #CONNECT = connect()
     for i in range(len(REC_SYS)):
+        if REC_SYS[i] == '-h':
+            print(helpTxt.helpTxt)
+            quit()
         if REC_SYS[i] == '-u':
             #global URL
             URL = REC_SYS[i+1]
