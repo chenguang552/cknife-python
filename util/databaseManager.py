@@ -21,9 +21,9 @@ class databaseManager:
         return baseCodeForFile
 
     def DBMain(self,re):
-        sqlAddress = '127.0.0.1'#input("address(eg:localhost):")
-        sqlUser = 'root'#input("username:")
-        sqlPassword = '21112325HUAi'#input("password:")
+        sqlAddress = input("address(eg:localhost):")
+        sqlUser = input("username:")
+        sqlPassword = input("password:")
         sqlconnect = dbC.Mysql_Connect.replace('#1',sqlAddress,1)
         sqlconnect = sqlconnect.replace('#2',sqlUser,1)
         sqlconnect = sqlconnect.replace('#3',sqlPassword,1)
