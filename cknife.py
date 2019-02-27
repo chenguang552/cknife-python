@@ -47,7 +47,7 @@ try:
             FILE.Begin()
             quit()
         #数据库管理命令处理程序
-        if REC_SYS[j] == '--database':
+        if REC_SYS[j] == '--database' or REC_SYS[j] == '--db':
             DB = databaseManager(CONNECT)
             DB.Begin()
             quit()
