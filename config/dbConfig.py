@@ -14,16 +14,17 @@ Mysql_ShowDBs='''@@$searchcode="##";\
     $row_1 = mysqli_fetch_assoc($result2);\
     $id_1=array_keys($row_1);\
     foreach($id_1 as $j=>$key){\
+            echo "[[ ";\
             print($key);\
-            echo "\t";\
+            echo " ]]\t";\
             }\
     echo "\n";\
-    echo "--------\t-------\t---------\t-------->>>\n";\
     while($row = mysqli_fetch_assoc($result)){\
         $id=array_keys($row);\
         foreach($id as $i=>$k){\
+            echo "-[ ";\
             print($row[$k]);\
-                echo "\t";\
+            echo " ]-\t";\
             }\
         echo "\n";\
     }\
