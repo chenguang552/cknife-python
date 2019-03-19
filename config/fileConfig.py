@@ -23,3 +23,25 @@ PHP_UPLOAD ='''@@$file="#1";$strtofile="#2";$ff=fopen($file, "w");if($ff){echo '
 
 PHP_test = '''$ff=fopen("newfile.txt","r");echo fgets($ff,1024);'''
 
+
+ASP_test = ''' '''
+##################################################################################################
+
+JSP_fileBaseCode=''''''
+JSP_GETDIR = ''''''
+JSP_GETPATH = '''path'''
+JSP_MKDIR = ''''''
+JSP_RMDIR = ''''''
+JSP_CD = '''CD'''
+JSP_CHDIR = '''changepath'''
+JSP_READ = ''''''
+JSP_WRITE =''''''
+JSP_WRITETO = ''''''
+JSP_MKFILE = ''''''
+JSP_DELETE = ''''''
+JSP_RENAME = ''''''
+JSP_COPY = ''''''
+
+JSP_UPLOAD =''''''
+
+JSP_test = ''' '''
