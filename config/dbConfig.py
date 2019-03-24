@@ -13,18 +13,19 @@ PHP_Mysql_ShowDBs='''@@$searchcode="##";\
     $result2=mysqli_query($sql,$searchcode);\
     $row_1 = mysqli_fetch_assoc($result2);\
     $id_1=array_keys($row_1);\
+    $num=0;\
     foreach($id_1 as $j=>$key){\
-            echo "\t|\t";\
-            print($key);\
-            echo " \t|\t";\
+            echo "|\t";\
+            print($key);$num=$num+1;\
+            echo " \t|";\
             }\
-    echo "\n";\
+    echo "\n";for($i=0;$i<$num;$i++)echo "---------------------";echo "\n";\
     while($row = mysqli_fetch_assoc($result)){\
         $id=array_keys($row);\
         foreach($id as $i=>$k){\
-            echo "\t|\t";\
+            echo "|\t";\
             print($row[$k]);\
-            echo "\t|\t";\
+            echo "\t|";\
             }\
         echo "\n";\
     }\

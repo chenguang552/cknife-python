@@ -58,8 +58,8 @@ class databaseManager:
                 else:
                     if self.con.getTyp()=="php":
                         DBS = dbC.PHP_Mysql_ShowDBs.replace('@@',sqlconnectY,1)
-                        date = { self.key : DBS }
                         DBS = DBS.replace('##',flag,1)
+                        date = { self.key : DBS }
                     if self.con.getTyp()=="jsp":
                         date = {
                             self.key:dbC.JSP_Mysql_Connect,
