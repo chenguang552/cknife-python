@@ -1,14 +1,14 @@
 helpTxt="""
                    cknife-python 1.0 帮助界面              \n\n\
 参数:      -h  唤出帮助文档\n\
-     -u  ['url']  目标链接参数\n\
-     -k  ['key']  目标连接参数值\n\
-     -t  ['type'] 目标类型(php、jsp、asp、asp等，目前仅支持php)\n\n\
-     --shell  进入模拟shell界面\n\
+     -u  ['url']  目标链接参数[必须]\n\
+     -k  ['key']  目标连接参数值[必须]\n\
+     -t  ['type'] 目标类型[必须](php、jsp、asp、asp等，目前仅支持php、jsp)\n\n\
+     --shell[必须1/3]  进入模拟shell界面\n\
        模拟shell模式下直接输入cmd命令执行，不支持与内嵌式命令行交互\n\n\
-     --db / --database   进入数据库管理界面\n\
+     --db / --database[必须1/3]   进入数据库管理界面\n\
        数据库管理界面按照提示输入数据库相关参数后使用标准数据库命令操作\n\n\
-     --file   进入文件管理界面\n\
+     --file[必须1/3]   进入文件管理界面\n\
        文件管理界面有如下命令：\n\
                 [cd] 目录名\n\
                                 切换文件目录\n\
